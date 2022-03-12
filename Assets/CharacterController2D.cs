@@ -41,6 +41,8 @@ public class CharacterController2D: MonoBehaviour
 
     public float jumpTime;
 
+public int extraJumpValue;
+private int extraJumps;
     private bool isJumping;
 
 
@@ -62,6 +64,7 @@ public class CharacterController2D: MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody2D>();
+        extraJumps = extraJumpValue;
 
     }
 
@@ -95,6 +98,9 @@ public class CharacterController2D: MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
+if(isGrounded){
+    extraJumps = extraJumpValue;
+}
 
 
         //turn twords you go
@@ -151,7 +157,7 @@ public class CharacterController2D: MonoBehaviour
 
         //lets player jump
 
-        if (isGrounded == true && Input.GetKeyDown("space") && isJumping == false)
+        if (Input.GetKeyDown("space") && extraJumps > 0)
 
         {
 
@@ -160,6 +166,7 @@ public class CharacterController2D: MonoBehaviour
             jumpTimeCounter = jumpTime;
 
             rb.velocity = Vector2.up * jumpForce;
+            extraJumps--;
 
         }
 
@@ -167,30 +174,14 @@ public class CharacterController2D: MonoBehaviour
 
         //makes you jump higher when you hold down space
 
-        if (Input.GetKey(KeyCode.Space) && isJumping == true)
+        if (Input.GetKey(KeyCode.Space) && isJumping == true) {
 
-        {
-
-
-
-            if (jumpTimeCounter > 0)
-
-            {
-
+            if (jumpTimeCounter > 0) {
                 rb.velocity = Vector2.up * jumpForce;
-
                 jumpTimeCounter -= Time.deltaTime;
 
-            }
-
-            else
-
-            {
-
+            } else {
                 isJumping = false;
-
-
-
             }
 
 
