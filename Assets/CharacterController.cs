@@ -24,6 +24,9 @@ public class CharacterController : MonoBehaviour
 	[Header("Events")]
 	[Space]
 
+int availableJumps;
+
+public int totalJumps = 2;
 	public UnityEvent OnLandEvent;
 
 	[System.Serializable]
@@ -75,9 +78,14 @@ public class CharacterController : MonoBehaviour
 			}
 		}
 
+		if (m_Grounded){
+			availableJumps = totalJumps;
+		}
+
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
+
 
 			// If crouching
 			if (crouch)
@@ -126,15 +134,26 @@ public class CharacterController : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
+		if (/*m_Grounded &&*/ jump)
 		{
+			if(availableJumps > 0){
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			m_Rigidbody2D.velocity = (new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce));
+			availableJumps--;
+		}
 		}
 
-        if(!m_Grounded && crouch){
+		// fast fall
+        if(!m_Grounded ){
+
+			if(availableJumps == totalJumps){
+				availableJumps--;
+			}
+
+			if( crouch){
             m_Rigidbody2D.AddForce(new Vector2(0f, -m_JumpForce));
+			}
         }
 	}
 

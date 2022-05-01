@@ -646,7 +646,8 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Collab: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -660,11 +661,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 06a393be-670c-41c1-91bc-f72ccb4a560b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: DASH N WAVE
+  organizationId: thomasfkjorna
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
